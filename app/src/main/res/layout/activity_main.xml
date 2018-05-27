@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.v7.widget.GridLayout
+    <android.widget.GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="395dp"
         android:layout_height="395dp"
@@ -17,12 +17,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/board"
-        app:columnCount="3"
+        android:columnCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:rowCount="3">
+        android:rowCount="3">
 
         <ImageView
             android:id="@+id/imageView1"
@@ -117,7 +117,7 @@
             android:onClick="dropped"
             android:tag="8" />
 
-    </android.support.v7.widget.GridLayout>
+    </android.widget.GridLayout>
 
     <TextView
         android:id="@+id/textView"
@@ -130,6 +130,7 @@
         android:layout_marginTop="5dp"
         android:text="TextView"
         android:textSize="20sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -145,6 +146,7 @@
         android:layout_marginTop="8dp"
         android:onClick="playAgain"
         android:text="Play Again"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />

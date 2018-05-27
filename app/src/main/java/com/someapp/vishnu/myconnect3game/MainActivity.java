@@ -4,7 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
                                 {0, 4, 8}, {2, 4, 6}};
     int player = 0; // 0 is yellow, and 1 is red
     boolean finishedGame = false;
+    String winner = "";
 
     public void dropped(View view) {
 
@@ -51,18 +55,63 @@ public class MainActivity extends AppCompatActivity {
             if(gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
                     gameState[winningPosition[1]] == gameState[winningPosition[2]] &&
                     gameState[winningPosition[0]] != 2) {
+
+                finishedGame = true;
+
                 if(gameState[winningPosition[0]] == 1) {
                     Toast.makeText(this, "Red has won!", Toast.LENGTH_SHORT ).show();
-                    finishedGame = true;
+                    winner = "Red";
                 } else{
                     Toast.makeText(this,
                             "Yellow has won!", Toast.LENGTH_SHORT ).show();
-                    finishedGame = true;
+                    winner = "Yellow";
                 }
+
+                Button playAgainButton = (Button) findViewById(R.id.button);
+
+                TextView winnerTextView = (TextView) findViewById(R.id.textView);
+
+                winnerTextView.setText(winner + " has won!");
+
+                playAgainButton.setVisibility(View.VISIBLE);
+                winnerTextView.setVisibility(View.VISIBLE);
 
             }
 
         }
+
+    }
+
+    public void playAgain(View view) {
+
+        if(!finishedGame) { return; }
+
+        Button playAgainButton = (Button) findViewById(R.id.button);
+
+        TextView winnerTextView = (TextView) findViewById(R.id.textView);
+
+        playAgainButton.setVisibility(View.INVISIBLE);
+        winnerTextView.setVisibility(View.INVISIBLE);
+
+        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
+
+        for(int i = 0; i < gridLayout.getChildCount(); i++) {
+
+            ImageView counter = (ImageView) gridLayout.getChildAt(i);
+
+            counter.setImageDrawable(null);
+
+        }
+
+        for(int i = 0; i < gameState.length; i++) {
+
+            gameState[i] = 2;
+
+        }
+
+        player = 0;
+
+        finishedGame = false;
 
     }
 
